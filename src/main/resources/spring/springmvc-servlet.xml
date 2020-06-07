@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+
+    <!-- springMVC只扫描com.wuyl.controller下带Controller注解的类 -->
+    <context:component-scan base-package="com.wuyl.controller" >
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- 根
+    <mvc:view-controller path="/" view-name="blog"/>-->
+
+    <!-- 加载处理器映射器RequestMappingHandlerMapping与处理器适配器RequestMappingHandlerAdapter
+    激活基于注解的配置 @RequestMapping, @ExceptionHandler,数据绑定 ,@NumberFormat ,
+    @DateTimeFormat ,@Controller ,@Valid ,@RequestBody ,@ResponseBody等  -->
+    <mvc:annotation-driven />
+
+    <!-- 静态资源配置 静态资源放在WEB-INF下只允许服务端访问-->
+    <mvc:resources location="/WEB-INF/assets/" mapping="/assets/**"></mvc:resources>
+
+    <!-- 视图层配置 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"/>
+        <property name="suffix" value=".html"/>
+    </bean>
+
+    <!-- 加载注解驱动 -->
+    <mvc:annotation-driven conversion-service="conversionService"/>
+    <!-- 转换器配置 -->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.wuyl.interceptor.DateConverter"/>
+            </set>
+        </property>
+    </bean>
+</beans>
