@@ -11,6 +11,6 @@
     <title>$Title$</title>
   </head>
   <body>
-  hi this my test spring-webmvc program,ha
+  test my auto reload new version,it is work?
   </body>
 </html>
