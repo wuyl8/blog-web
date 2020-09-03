@@ -13,4 +13,7 @@
   <body>
   test my auto reload new version,it is work?
   </body>
+<script>
+    window.location.href = "/blog-web/blog/testBlog.do";
+</script>
 </html>
