@@ -11,6 +11,8 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 
+    <!--加载工具 -->
+    <bean class="com.wuyl.utils.SpringContextUtils"></bean>
     <!-- springMVC只扫描com.wuyl.controller下带Controller注解的类 -->
     <context:component-scan base-package="com.wuyl.controller" >
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>

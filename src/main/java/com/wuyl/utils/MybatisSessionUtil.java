@@ -1,4 +1,4 @@
-package com.wuyl.utils.servlet;
+package com.wuyl.utils;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;

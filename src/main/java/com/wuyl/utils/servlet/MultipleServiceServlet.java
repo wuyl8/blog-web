@@ -1,7 +1,11 @@
 package com.wuyl.utils.servlet;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.wuyl.utils.SpringContextUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.util.ClassUtils;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +14,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class MultipleServiceServlet extends HttpServlet {
-    private Log log =  LogFactory.getLog(MultipleServiceServlet.class);
+    //private Log log =  LogFactory.getLog(MultipleServiceServlet.class);
+    Logger log = LogManager.getLogger();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
@@ -22,7 +27,8 @@ public class MultipleServiceServlet extends HttpServlet {
         String serviceName = req.getParameter("serviceName");
         try {
             Method declaredMethod = this.getClass().getDeclaredMethod(serviceName, HttpServletRequest.class, HttpServletResponse.class);
-            declaredMethod.invoke(this,req,resp);
+            String name = ClassUtils.getShortNameAsProperty(this.getClass());
+            declaredMethod.invoke(SpringContextUtils.getBean(name),req,resp);
         } catch (NoSuchMethodException e) {
             log.error("Dispatcher Service["+serviceName+" is not exist.]",e);
         } catch (IllegalAccessException e) {
