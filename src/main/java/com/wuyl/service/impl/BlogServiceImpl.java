@@ -27,7 +27,7 @@ public class BlogServiceImpl implements BlogService {
         int id = commonDao.qryLastInsertId();
         int seq = commonDao.qrySequence("seq_operator_log");
         System.out.println("id="+id+";seq="+seq);
-
+        int i = 1/0;
         return blogDao.qryUserDetail();
     }
 }

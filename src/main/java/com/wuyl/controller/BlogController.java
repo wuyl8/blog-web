@@ -40,9 +40,6 @@ public class BlogController {
     public String userDetail(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         log.info("进入controller");
         List<Map> list = blogService.qryUserDetail();
-        for(Map map:list){
-            System.out.println(map);
-        }
         model.addAttribute("name", name);
         return "blog";
     }

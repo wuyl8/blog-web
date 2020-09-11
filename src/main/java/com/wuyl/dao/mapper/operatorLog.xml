@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wuyl.dao.OperationLogDao">
+    <!--   -->
+    <select id="qryOperatorLog" resultType="com.wuyl.vo.OperationLogVO">
+        SELECT * from operation_log
+    </select>
+
+    <!--   -->
+    <insert id="insertOperatorLog" parameterType="com.wuyl.vo.OperationLogVO"  useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO operation_log (
+            id,
+            bean_name,
+            cur_user,
+            method,
+            http_method,
+            params,
+            remote_addr,
+            session_id,
+            request_url,
+            request_start_time,
+            create_date,
+            user_agent,
+            result,
+            request_time,
+            request_end_time
+        )
+        VALUES
+            (#{id},
+            #{beanName},
+            #{curUser},
+            #{method},
+            #{httpMethod},
+            #{params},
+            #{remoteAddr},
+            #{sessionId},
+            #{requestUrl},
+            #{requestStartTime},
+            #{createDate},
+            #{userAgent},
+            #{result},
+            #{requestTime},
+            #{requestEndTime}
+            )
+    </insert>
+
+</mapper>

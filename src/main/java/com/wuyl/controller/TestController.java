@@ -1,13 +1,11 @@
 package com.wuyl.controller;
 
 import com.mysql.jdbc.PreparedStatement;
-import com.wuyl.interceptor.DateConverter;
 import com.wuyl.utils.servlet.MultipleServiceServlet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +15,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.UUID;
 
 @Controller
 @WebServlet("/blog/test")
@@ -73,7 +70,8 @@ public class TestController extends MultipleServiceServlet {
                 Date date = new Date();
                 for (int j = 1; j <= 10000; j++) {
                     // 构建SQL后缀
-                    suffix.append("('"+"销售品"+i*j+"','123'"+ ",'123456'"+",'admin'"+",'"+"2016-08-12 14:43:26"+"','"+simpleDateFormat.format(date)+"','备注'" +"),");
+                    suffix.append("('" + "销售品").append(i * j).append("','123'").append(",'123456'").append(",'admin'")
+                            .append(",'").append("2016-08-12 14:43:26").append("','").append(simpleDateFormat.format(date)).append("','备注'").append("),");
                 }
                 // 构建完整SQL
                 String sql = prefix + suffix.substring(0, suffix.length() - 1);
@@ -95,7 +93,7 @@ public class TestController extends MultipleServiceServlet {
         // 结束时间
         Long end = new Date().getTime();
         // 耗时
-        System.out.println("1000万条数据插入花费时间 : " + (end - begin) / 1000 + " s");
+        System.out.println("100万条数据插入花费时间 : " + (end - begin) / 1000 + " s");
         System.out.println("插入完成");
     }
 }
